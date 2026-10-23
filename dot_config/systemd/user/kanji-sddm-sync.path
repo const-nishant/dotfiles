@@ -1,0 +1,11 @@
+[Unit]
+Description=Watch ii wallpaper state for Kanji SDDM sync
+
+[Path]
+PathChanged=%h/.local/state/quickshell/user/generated/colors.json
+PathChanged=%h/.local/state/quickshell/user/generated/wallpaper/path.txt
+PathChanged=%h/.config/illogical-impulse/monitor-wallpapers.json
+PathChanged=%h/.config/illogical-impulse/config.json
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,21 @@
+--- a/.config/illogical-impulse/config.json
++++ b/.config/illogical-impulse/config.json
+@@ -110,15 +110,15 @@
+           "showDate": true,
+           "vertical": false
+         },
+-        "enable": false,
++        "enable": true,
+         "placementStrategy": "leastBusy",
+         "quote": {
+           "enable": false,
+           "text": ""
+         },
+-        "showOnlyWhenLocked": false,
++        "showOnlyWhenLocked": true,
+         "style": "cookie",
+-        "styleLocked": "cookie",
++        "styleLocked": "digital",
+         "x": 1313.9375,
+         "y": 104.765625
+       },

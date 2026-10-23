@@ -1,0 +1,11 @@
+[Unit]
+Description=Sync current ii wallpaper and Matugen palette to Kanji SDDM
+Documentation=file:%h/.config/ii-sddm-kanji/sync.sh
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/ii-sddm-kanji/sync.sh
+Nice=10
+
+[Install]
+WantedBy=default.target

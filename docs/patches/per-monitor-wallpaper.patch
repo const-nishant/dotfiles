@@ -1,0 +1,40 @@
+--- a/.config/quickshell/ii/modules/ii/background/Background.qml
++++ b/.config/quickshell/ii/modules/ii/background/Background.qml
+@@ -40,14 +40,35 @@
+         property int workspaceChunkSize: Config?.options.bar.workspaces.shown ?? 10
+         property int totalWorkspaces: Math.ceil(lastWorkspaceId / workspaceChunkSize) * workspaceChunkSize
+         // Wallpaper
+-        property bool wallpaperIsVideo: Config.options.background.wallpaperPath.endsWith(".mp4") || Config.options.background.wallpaperPath.endsWith(".webm") || Config.options.background.wallpaperPath.endsWith(".mkv") || Config.options.background.wallpaperPath.endsWith(".avi") || Config.options.background.wallpaperPath.endsWith(".mov")
+-        property string wallpaperPath: wallpaperIsVideo ? Config.options.background.thumbnailPath : Config.options.background.wallpaperPath
++        property var monitorWallpapers: ({})
++        property string monitorWallpaperPath: {
++            const perMonitor = bgRoot.monitorWallpapers || ({});
++            const screenName = bgRoot.modelData?.name ?? "";
++            return perMonitor[screenName] || Config.options.background.wallpaperPath;
++        }
++        property bool wallpaperIsVideo: monitorWallpaperPath.endsWith(".mp4") || monitorWallpaperPath.endsWith(".webm") || monitorWallpaperPath.endsWith(".mkv") || monitorWallpaperPath.endsWith(".avi") || monitorWallpaperPath.endsWith(".mov")
++        property string wallpaperPath: wallpaperIsVideo ? Config.options.background.thumbnailPath : monitorWallpaperPath
+         property bool wallpaperSafetyTriggered: {
+             const enabled = Config.options.workSafety.enable.wallpaper;
+             const sensitiveWallpaper = (CF.StringUtils.stringListContainsSubstring(wallpaperPath.toLowerCase(), Config.options.workSafety.triggerCondition.fileKeywords));
+             const sensitiveNetwork = (CF.StringUtils.stringListContainsSubstring(Network.networkName.toLowerCase(), Config.options.workSafety.triggerCondition.networkNameKeywords));
+             return enabled && sensitiveWallpaper && sensitiveNetwork;
+         }
++
++        FileView {
++            id: monitorWallpapersFile
++            path: `${Directories.shellConfig}/monitor-wallpapers.json`
++            watchChanges: true
++            onFileChanged: reload()
++            onLoaded: {
++                try {
++                    bgRoot.monitorWallpapers = JSON.parse(monitorWallpapersFile.text());
++                } catch (e) {
++                    console.warn("[Background] Failed to parse monitor wallpapers:", e);
++                    bgRoot.monitorWallpapers = ({});
++                }
++            }
++        }
+         readonly property real parallaxRation: Config.options.background.parallax.workspaceZoom
+         property real minSuitableScale: 1 // Some reasonable init, to be updated
+         property real effectiveWallpaperScale: minSuitableScale * parallaxRation
