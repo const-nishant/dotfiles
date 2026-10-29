@@ -1,0 +1,8 @@
+[sie][Filter#0]
+frequency=80
+slope=1
+type=1
+
+[soe][Filter#0]
+frequency=60
+type=1

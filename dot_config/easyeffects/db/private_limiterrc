@@ -1,0 +1,12 @@
+[sie][Limiter#0]
+gainBoost=false
+inputGain=-6
+release=20
+threshold=-3
+
+[soe][Limiter#0]
+attack=2
+gainBoost=false
+lookahead=4
+release=8
+threshold=-1
