@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Enables the Kanji SDDM sync units after chezmoi installs or changes them.
+# Skipped until the SDDM theme is installed (docs/sddm/kanji-dynamic), since the
+# sync script writes into /var/lib/ii-sddm-kanji.
+# path unit hash: {{ include "dot_config/systemd/user/kanji-sddm-sync.path" | sha256sum }}
+# service unit hash: {{ include "dot_config/systemd/user/kanji-sddm-sync.service" | sha256sum }}
+
+if [ ! -d /var/lib/ii-sddm-kanji ]; then
+    echo "Kanji SDDM theme not installed yet; skipping unit enable."
+    exit 0
+fi
+
+systemctl --user daemon-reload
+systemctl --user enable --now kanji-sddm-sync.path kanji-sddm-sync.service || true
