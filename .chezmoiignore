@@ -10,3 +10,6 @@ docs/**
 .config/**/*credentials*
 .ssh/**
 .gnupg/**
+
+# Repo-only: applied by system/install-system.sh, not into $HOME
+system/**
