@@ -20,6 +20,8 @@ Arch Linux + Hyprland + [end-4/illogical-impulse](https://github.com/end-4/dots-
 - `~/.config/kitty/` (config and helper scripts), `~/.config/foot/`, `~/.config/fuzzel/fuzzel.ini`
 - `~/.config/fish/config.fish`, `~/.config/fish/auto-Hypr.fish`, `~/.config/fish/conf.d/fish_frozen_key_bindings.fish`
 - `~/.config/starship.toml`, `~/.config/cava/`, `~/.config/mpv/mpv.conf`, `~/.config/git/ignore`
+- `~/.config/mimeapps.list`, `~/.config/wlogout/`, `~/.config/nwg-displays/config`, `~/.config/kde-material-you-colors/config.conf`, `~/.config/zshrc.d/` (without the installer-owned `dots-hyprland.zsh`)
+- `~/.config/kdeglobals` is seeded once with `create_` and never overwritten, because most of it is colours that kde-material-you-colors rewrites with each wallpaper
 - `~/.config/zed/settings.json`, `~/.config/easyeffects/db/` presets, `~/.config/Kvantum/kvantum.kvconfig`
 - `~/.config/fontconfig/fonts.conf`, `~/.config/fontconfig/conf.d/50-windows-aliases.conf`
 - `~/.config/gtk-3.0/settings.ini`
