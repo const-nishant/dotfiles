@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Regenerates the package lists in the dotfiles repo after pacman transactions.
+# Runs as root from a pacman hook, so it drops to the repo owner to keep ownership sane.
+set -euo pipefail
+repo=/home/const-nishant/.local/share/chezmoi
+owner="$(stat -c %U "$repo")"
+runuser -u "$owner" -- bash -c '
+  cd "$1"
+  pacman -Qqen | sort > packages/pacman.txt
+  pacman -Qqem | sort > packages/aur.txt
+' _ "$repo"

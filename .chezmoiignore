@@ -13,3 +13,4 @@ docs/**
 
 # Repo-only: applied by system/install-system.sh, not into $HOME
 system/**
+packages/**
