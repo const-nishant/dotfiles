@@ -1,0 +1,62 @@
+diff -ruN a/.config/quickshell/ii/modules/common/models/quickToggles/PowerProfilesToggle.qml b/.config/quickshell/ii/modules/common/models/quickToggles/PowerProfilesToggle.qml
+--- a/.config/quickshell/ii/modules/common/models/quickToggles/PowerProfilesToggle.qml	2026-10-29 18:22:13.960866357 +0530
++++ b/.config/quickshell/ii/modules/common/models/quickToggles/PowerProfilesToggle.qml	2026-10-29 18:22:13.961382128 +0530
+@@ -15,11 +15,15 @@
+         case PowerProfile.Balanced: return "airwave"
+         case PowerProfile.Performance: return "local_fire_department"
+     }
+-    statusText: switch(PowerProfiles.profile) {
++    readonly property string profileName: switch(PowerProfiles.profile) {
+         case PowerProfile.PowerSaver: return "Power Saver"
+         case PowerProfile.Balanced: return "Balanced"
+         case PowerProfile.Performance: return "Performance"
+     }
++    readonly property string shiftModeName: MsiEc.shiftMode.charAt(0).toUpperCase() + MsiEc.shiftMode.slice(1)
++    statusText: (MsiEc.available && MsiEc.shiftMode !== "")
++        ? `${profileName} · ${shiftModeName}${MsiEc.shiftModeInSync ? "" : " !"}`
++        : profileName
+     
+     mainAction: () => {
+         if (PowerProfiles.hasPerformanceProfile) {
+diff -ruN a/.config/quickshell/ii/modules/ii/bar/BatteryPopup.qml b/.config/quickshell/ii/modules/ii/bar/BatteryPopup.qml
+--- a/.config/quickshell/ii/modules/ii/bar/BatteryPopup.qml	2026-10-29 18:22:13.959825378 +0530
++++ b/.config/quickshell/ii/modules/ii/bar/BatteryPopup.qml	2026-10-29 18:22:13.960355353 +0530
+@@ -64,6 +64,16 @@
+         }
+ 
+         StyledPopupValueRow {
++            visible: MsiEc.available && MsiEc.shiftMode !== ""
++            icon: "speed"
++            label: Translation.tr("Performance mode:")
++            value: {
++                const mode = MsiEc.shiftMode.charAt(0).toUpperCase() + MsiEc.shiftMode.slice(1);
++                return MsiEc.shiftModeInSync ? mode : `${mode} (out of sync)`;
++            }
++        }
++
++        StyledPopupValueRow {
+             icon: "heart_check"
+             label: Translation.tr("Health:")
+             value: `${(Battery.health).toFixed(1)}%`
+diff -ruN a/.config/quickshell/ii/services/MsiEc.qml b/.config/quickshell/ii/services/MsiEc.qml
+--- a/.config/quickshell/ii/services/MsiEc.qml	2026-10-29 18:22:13.958635982 +0530
++++ b/.config/quickshell/ii/services/MsiEc.qml	2026-10-29 18:22:13.959284244 +0530
+@@ -40,6 +40,18 @@
+         write({ "cooler_boost": enabled ? "on" : "off" });
+     }
+ 
++    // The EC can change modes on its own (e.g. a hotkey), so re-read it periodically
++    readonly property bool shiftModeInSync: shiftMode === "" || shiftMode === targetShiftMode
++    function refresh() {
++        write({});
++    }
++    Timer {
++        interval: 5000
++        repeat: true
++        running: root.available
++        onTriggered: root.refresh()
++    }
++
+     Connections {
+         target: Config
+         function onReadyChanged() {

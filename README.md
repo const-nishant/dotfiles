@@ -69,6 +69,7 @@ Arch Linux + Hyprland + [end-4/illogical-impulse](https://github.com/end-4/dots-
    patch -p1 < ~/.local/share/chezmoi/docs/patches/per-monitor-wallpaper.patch
    patch -p1 < ~/.local/share/chezmoi/docs/patches/hyprland-rules-no-blur.patch
    patch -p1 < ~/.local/share/chezmoi/docs/patches/ii-lock-clock.patch
+   patch -p1 < ~/.local/share/chezmoi/docs/patches/ii-ec-shift-mode.patch
    ```
 
 5. Install the Kanji SDDM theme:
