@@ -1,3 +1,12 @@
 README.md
 docs/**
 .gitignore
+
+# Secrets / credentials: never track
+.config/gh/hosts.yml
+.config/opencode/service.json
+.config/**/*token*
+.config/**/*secret*
+.config/**/*credentials*
+.ssh/**
+.gnupg/**
