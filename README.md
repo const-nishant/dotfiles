@@ -30,6 +30,7 @@ Arch Linux + Hyprland + [end-4/illogical-impulse](https://github.com/end-4/dots-
 - `~/.config/systemd/user/kanji-sddm-sync.path`, `~/.config/systemd/user/kanji-sddm-sync.service`
 - `packages/pacman.txt`, `packages/aur.txt` — explicitly installed packages, kept current by a pacman hook
 - `system/` — files that live outside `$HOME`, applied by `system/install-system.sh`
+- `~/.config/fish/functions/lan-on.fish`, `lan-off.fish` — toggle LAN access for dev ports and SSH (see `docs/network.md`)
 
 ## Not managed
 
@@ -56,7 +57,7 @@ Arch Linux + Hyprland + [end-4/illogical-impulse](https://github.com/end-4/dots-
    bash ~/.local/share/chezmoi/system/install-system.sh
    ```
 
-   `install-system.sh` installs the reflector and journald configs, enables the `paccache` and `reflector` timers, and installs the pacman hook that regenerates the package lists. The hook only rewrites the lists; committing them is manual.
+   `install-system.sh` installs the reflector and journald configs, enables the `paccache` and `reflector` timers, installs the pacman hook that regenerates the package lists, and applies the network hardening (ufw default-deny, LLMNR off, Wi-Fi MAC randomization, key-only sshd; see `docs/network.md`). The hook only rewrites the lists; committing them is manual.
 
 3. Set fish as the login shell:
 
