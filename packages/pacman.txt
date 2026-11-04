@@ -17,6 +17,7 @@ firefox
 git
 github-cli
 gst-plugin-pipewire
+gst-plugin-spotify
 htop
 intel-media-driver
 intel-ucode
@@ -52,6 +53,7 @@ plasma-browser-integration
 power-profiles-daemon
 python-evdev
 python-gobject
+realtime-privileges
 reflector
 resources
 rustup
@@ -59,10 +61,12 @@ sddm
 smartmontools
 sof-firmware
 spotify-launcher
+strawberry
 sudo
 ttf-caladea
 ttf-carlito
 ttf-liberation
+ufw
 uwsm
 vim
 vlc
