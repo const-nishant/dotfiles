@@ -22,6 +22,7 @@ miniconda3
 msi-ec-dkms-git
 packettracer
 sddm-astronaut-theme
+vesktop-bin
 visual-studio-code-bin
 yay-bin
 yay-bin-debug

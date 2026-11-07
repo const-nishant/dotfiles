@@ -4,7 +4,6 @@ bluez
 bluez-utils
 calf
 chezmoi
-discord
 dkms
 docker
 docker-compose
