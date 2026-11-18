@@ -16,7 +16,6 @@ firefox
 git
 github-cli
 gst-plugin-pipewire
-gst-plugin-spotify
 htop
 intel-media-driver
 intel-ucode
@@ -59,8 +58,6 @@ rustup
 sddm
 smartmontools
 sof-firmware
-spotify-launcher
-strawberry
 sudo
 ttf-caladea
 ttf-carlito
